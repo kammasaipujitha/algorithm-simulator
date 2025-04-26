@@ -1,0 +1,283 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void selection_sort(int arr[], int size);
+void insertion_sort(int arr[], int size);
+void bubble_sort(int arr[], int size);
+int linear_search(int arr[], int size, int key);
+int binary_search(int arr[], int size, int key);
+
+void selection_sort(int arr[], int size) {
+    cout << "\n\n\t* * * Original Array Elements:* * *\n";
+    for (int i = 0; i < size; i++) {
+        cout << "\t" << arr[i];
+    }
+
+    int choice;
+    cout << "\n\n1. Ascending Order\n";
+    cout << "2. Descending Order\n";
+    cout << "\nEnter your choice:\t";
+    cin >> choice;
+
+    switch (choice) {
+        case 1:
+            for (int i = 0; i < size - 1; i++) {
+                int min_idx = i;
+                for (int j = i + 1; j < size; j++) {
+                    if (arr[j] < arr[min_idx]) {
+                        min_idx = j;
+                    }
+                }
+                swap(arr[min_idx], arr[i]);
+
+                cout << "\n\n\t\t* * * PASS " << i + 1 << " * * *\t\t\n";
+                for (int k = 0; k < size; k++) {
+                    cout << "\t" << arr[k];
+                }
+                cout << "\n\t- - - - - - - - - - - - - - - - - -\n\n";
+            }
+            break;
+
+        case 2:
+            for (int i = 0; i < size - 1; i++) {
+                int max_idx = i;
+                for (int j = i + 1; j < size; j++) {
+                    if (arr[j] > arr[max_idx]) {
+                        max_idx = j;
+                    }
+                }
+                swap(arr[max_idx], arr[i]);
+
+                cout << "\n\n\t\t* * * PASS " << i + 1 << " * * *\t\t\n";
+                for (int k = 0; k < size; k++) {
+                    cout << "\t" << arr[k];
+                }
+                cout << "\n\t- - - - - - - - - - - - - - - - - -\n\n";
+            }
+            break;
+
+        default:
+            cout << "\n\n* * * INVALID SELECTION * * *\n\n";
+            return;
+    }
+
+    cout << "\n\n\t* * * Elements after Sorting * * *\n";
+    for (int i = 0; i < size; i++) {
+        cout << "\t" << arr[i];
+    }
+    cout << endl;
+}
+
+void insertion_sort(int arr[], int size) {
+    cout << "\n\n\t* * * Original Array Elements:* * *\n";
+    for (int i = 0; i < size; i++) {
+        cout << "\t" << arr[i];
+    }
+
+    int choice;
+    cout << "\n\n1. Ascending Order\n";
+    cout << "2. Descending Order\n";
+    cout << "\nEnter your choice:\t";
+    cin >> choice;
+
+    switch (choice) {
+        case 1:
+            for (int i = 1; i < size; i++) {
+                int key = arr[i];
+                int j = i - 1;
+                while (j >= 0 && arr[j] > key) {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+                arr[j + 1] = key;
+
+                cout << "\n\n\t\t* * * PASS " << i << " * * *\t\t\n";
+                for (int k = 0; k < size; k++) {
+                    cout << "\t" << arr[k];
+                }
+                cout << "\n\t- - - - - - - - - - - - - - - - - -\n\n";
+            }
+            break;
+
+        case 2:
+            for (int i = 1; i < size; i++) {
+                int key = arr[i];
+                int j = i - 1;
+                while (j >= 0 && arr[j] < key) {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+                arr[j + 1] = key;
+
+                cout << "\n\n\t\t* * * PASS " << i << " * * *\t\t\n";
+                for (int k = 0; k < size; k++) {
+                    cout << "\t" << arr[k];
+                }
+                cout << "\n\t- - - - - - - - - - - - - - - - - -\n\n";
+            }
+            break;
+
+        default:
+            cout << "\n\n* * * INVALID SELECTION * * *\n\n";
+            return;
+    }
+
+    cout << "\n\n\t* * * Elements after Sorting * * *\n";
+    for (int i = 0; i < size; i++) {
+        cout << "\t" << arr[i];
+    }
+    cout << endl;
+}
+
+void bubble_sort(int arr[], int size) {
+    cout << "\n\n\t* * * Original Array Elements:* * *\n";
+    for (int i = 0; i < size; i++) {
+        cout << "\t" << arr[i];
+    }
+
+    int choice;
+    cout << "\n\n1. Ascending Order\n";
+    cout << "2. Descending Order\n";
+    cout << "\nEnter your choice:\t";
+    cin >> choice;
+
+    switch (choice) {
+        case 1:
+            for (int i = 0; i < size - 1; i++) {
+                for (int j = 0; j < size - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        swap(arr[j], arr[j + 1]);
+                    }
+                }
+                cout << "\n\n\t\t* * * PASS " << i + 1 << " * * *\t\t\n";
+                for (int k = 0; k < size; k++) {
+                    cout << "\t" << arr[k];
+                }
+                cout << "\n\t- - - - - - - - - - - - - - - - - -\n\n";
+            }
+            break;
+
+        case 2:
+            for (int i = 0; i < size - 1; i++) {
+                for (int j = 0; j < size - i - 1; j++) {
+                    if (arr[j] < arr[j + 1]) {
+                        swap(arr[j], arr[j + 1]);
+                    }
+                }
+                cout << "\n\n\t\t* * * PASS " << i + 1 << " * * *\t\t\n";
+                for (int k = 0; k < size; k++) {
+                    cout << "\t" << arr[k];
+                }
+                cout << "\n\t- - - - - - - - - - - - - - - - - -\n\n";
+            }
+            break;
+
+        default:
+            cout << "\n\n* * * INVALID SELECTION * * *\n\n";
+            return;
+    }
+
+    cout << "\n\n\t* * * Elements after Sorting * * *\n";
+    for (int i = 0; i < size; i++) {
+        cout << "\t" << arr[i];
+    }
+    cout << endl;
+}
+
+int linear_search(int arr[], int size, int key) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == key) {
+            return i; // Return the index if found
+        }
+    }
+    return -1; // Return -1 if not found
+}
+
+int binary_search(int arr[], int size, int key) {
+    int start = 0;
+    int end = size - 1;
+
+    while (start <= end) {
+        int mid = (start + end) / 2;
+
+        if (arr[mid] == key) {
+            return mid; // Return the index if found
+        }
+        if (arr[mid] < key) {
+            start = mid + 1; // Search in the right half
+        } else {
+            end = mid - 1; // Search in the left half
+        }
+    }
+    return -1; // Return -1 if not found
+}
+
+int main() {
+    do {
+        cout << "\n\n\t* * * * WELCOME TO ALGORITHM SIMULATOR * * * *\n";
+        int choice;
+        int arr[10];
+        int size;
+        cout << "\n\t\t* * * Choices you have * * *\n";
+        cout << "\t- - - - - - - - - - - - - - - - - - - - - - -";
+        cout << "\n\t1. Selection Sort\n";
+        cout << "\t2. Insertion Sort\n";
+        cout << "\t3. Bubble Sort\n";
+        cout << "\t4. Linear Search\n";
+        cout << "\t5. Binary Search\n";
+        cout << "\t0. Exit\n";
+        cout << "* * * Enter your choice: * * * :  ";
+        cin >> choice;
+
+        if (choice > 0 && choice < 6) {
+            cout << "\nEnter size of the Array:\t";
+            cin >> size;
+            if (size > 10) {
+                cout << "Size exceeds maximum limit of 10. Please enter a valid size.\n";
+                continue;
+            }
+            for (int i = 0; i < size; i++) {
+                cout << "Enter element " << i + 1 << " :\t";
+                cin >> arr[i];
+            }
+        }
+
+        switch (choice) {
+            case 1: selection_sort(arr, size); break;
+            case 2: insertion_sort(arr, size); break;
+            case 3: bubble_sort(arr, size); break;
+            case 4: {
+                int key;
+                cout << "Enter the element to search: ";
+                cin >> key;
+                int result = linear_search(arr, size, key);
+                if (result != -1) {
+                    cout << "Element found at index: " << result << endl;
+                } else {
+                    cout << "Element not found in the array." << endl;
+                }
+                break;
+            }
+            case 5: {
+                int key;
+                cout << "Enter the element to search: ";
+                cin >> key;
+                // Ensure the array is sorted before performing binary search
+                cout << "Sorting the array for binary search...\n";
+                selection_sort(arr, size); // Sort the array first
+                int result = binary_search(arr, size, key);
+                if (result != -1) {
+                    cout << "Element found at index: " << result << endl;
+                } else {
+                    cout << "Element not found in the array." << endl;
+                }
+                break;
+            }
+            case 0: exit(0); break;
+            default: cout << "\nx x x Invalid Selection x x x\n";
+        }
+    } while (true);
+
+    return 0;
+}
